@@ -34,8 +34,8 @@ def init():
             uid = int(os.environ['SUDO_UID'])
             gid = int(os.environ['SUDO_GID'])
             os.chown(dirname, uid, gid)
-    except OSError:
-        pass
+    except OSError as e:
+        print(repr(e))
     p = subprocess.Popen(['git', '--git-dir', repo(), 'init', '--bare', '-q'],
                          close_fds=True,
                          preexec_fn=unroot,
